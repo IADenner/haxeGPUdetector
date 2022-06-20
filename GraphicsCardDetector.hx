@@ -1,4 +1,4 @@
-package gameTools.things;
+package;
 import haxe.io.Bytes;
 import haxe.io.Input;
 import sys.io.Process;
