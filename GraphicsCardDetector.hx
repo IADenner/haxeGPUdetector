@@ -16,7 +16,7 @@ class GraphicsCardDetector
 	}
 	
 	///returns whether or not we have a name-brand graphics card. Probably only works on the CPP target. 
-	public static function detectGraphicsCard():Bool
+	public static function detectGraphicsCard():String
 	{
 		//this outputs a string with all detected graphics cards, including integrated.
 		var t:Process = new Process("wmic path win32_VideoController get name", null, false);
@@ -27,14 +27,17 @@ class GraphicsCardDetector
 		
 		
 		//this is silly but I'm just searching for the names of any graphics card brand I can think of. You could ABSOLUTELY search for specific graphics cards (or strings like 2060/3060ti etc etc) within this and modify your settings accordingly.
-		var ret:Bool = true;
+		var ret:String = "No GPU";
 		
 		if (outputString.indexOf("NVIDIA") == -1 && outputString.indexOf("Radeon") == -1 && outputString.indexOf("GeForce") == -1)
 		{
 			trace("No graphics card detected");
-			ret = false;
 		}
-		else trace("Graphics card detected!");
+		else 
+		{
+			trace("Graphics card detected!");
+			ret = outputString;
+		}
 		h.close();
 		t.close();	
 		
